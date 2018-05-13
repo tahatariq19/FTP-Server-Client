@@ -2,14 +2,14 @@ import sys, os
 from ftplib import FTP
 
 ftp = FTP('')
-ftp.connect('127.0.0.1',1026)
+ftp.connect('127.0.0.1', 21)
 ftp.login('admin', 'admin')
 ftp.cwd('/Server')
 ftp.retrlines('LIST')
 
 def uploadfile():
-	filename = sys.argv[1] 
-	ftp.storbinary('STOR '+ filename, open(filename, 'rb'))
+	filename = 'download.txt'
+	ftp.storlines('STOR '+ filename, open('download.txt', 'rb'))
 	ftp.quit()
 
 def downloadfile():
