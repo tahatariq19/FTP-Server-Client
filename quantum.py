@@ -38,14 +38,14 @@ alph = -(hbar**2)/(2*mass)
 
 # Discrete solution space
 dt = 0.001
-Lx, Ly = 110, 110
+Lx, Ly = 150, 150
 imshow_scale = 3
 fps = 30
 
 # Initial wave function, Gaussian packet with momentum
 F = np.zeros((2, Lx, Ly), dtype=np.float64)
-for x in xrange(Lx):
-    for y in xrange(Ly):
+for x in range(Lx):
+    for y in range(Ly):
         gauss = np.exp(-0.5*np.sqrt(5*((x-Lx/2)**2+(y-Ly/6)**2) - 100j*y))
         F[:, x, y] = np.real(gauss), np.imag(gauss)
 F = normalize(F)
@@ -59,7 +59,7 @@ V[:, -5:] = 100
 # Dissipation function on boundaries to effectively "open the box"
 B = np.zeros((Lx, Ly), dtype=np.float64)
 bthick = 10
-for i in xrange(bthick):
+for i in range(bthick):
     s = 50*(i/bthick)**3
     B[bthick-1-i, :] = s
     B[-(bthick-1-i)-1, :] = s
@@ -108,8 +108,6 @@ while True:
     elapsed = time.time() - start
     if elapsed < dt:
         if not speed_flag:
-            print("Nice computer!")
             print("You can run {} times faster than realtime.".format(np.round(dt/elapsed, 4)))
-            print("Try using that excess performance by simulating over a larger grid.\n")
             speed_flag = True
         time.sleep(dt - elapsed)
