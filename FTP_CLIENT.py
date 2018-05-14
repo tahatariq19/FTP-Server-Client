@@ -9,11 +9,11 @@ ftp.retrlines('LIST')
 
 def uploadfile():
 	filename = os.path.basename(sys.argv[1])
-	ftp.storlines('STOR '+ filename, open('download.txt', 'rb'))
+	ftp.storlines('STOR '+ filename, open(filename, 'rb'))
 	ftp.quit()
 
 def downloadfile():
-	filename = 'download.txt'
+	filename = os.path.basename(sys.argv[1])
 	localfile = open(filename, 'wb')
 	ftp.retrbinary('RETR ' + filename, localfile.write, 1024)
 	ftp.quit()
