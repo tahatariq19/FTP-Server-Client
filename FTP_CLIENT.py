@@ -8,7 +8,7 @@ ftp.cwd('/Server')
 ftp.retrlines('LIST')
 
 def uploadfile():
-	filename = 'download.txt'
+	filename = os.path.basename(sys.argv[1])
 	ftp.storlines('STOR '+ filename, open('download.txt', 'rb'))
 	ftp.quit()
 
